@@ -12,7 +12,7 @@ const app = express()
 
 app.use(cors({
   origin (origin, callback) {
-    if (origin === undefined || origin.includes('github') || origin.includes('localhost') || origin.includes('127.0.0.1')) {
+    if (origin.includes('github') || origin.includes('localhost')) {
       callback(null, true)
     } else {
       callback(new Error('Not allowed'), false)
