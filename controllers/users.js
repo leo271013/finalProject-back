@@ -31,7 +31,6 @@ export const login = async (req, res) => {
       const result = user.toObject()
       delete result.tokens
       result.token = token
-      result.cart = result.cart.length
       res.status(200).send({ success: true, message: '', result })
     } else {
       res.status(404).send({ success: false, message: '帳號或密碼錯誤' })
