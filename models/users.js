@@ -53,6 +53,22 @@ const userSchema = new mongoose.Schema({
         }
       }
     ]
+  },
+  userName: {
+    type: String,
+    minlength: [1, '名稱必須 1 個字以上'],
+    maxlength: [10, '帳號必須 10 個字以下'],
+    required: [true, '名稱不能為空'],
+    default: '使用者'
+  },
+  aboutMe: {
+    type: String,
+    maxlength: [50, '介紹必須 50 個字以下'],
+    default: ''
+  },
+  userImg: {
+    type: String,
+    default: 'https://res.cloudinary.com/duastxica/image/upload/v1644384306/pngegg_vy0np4.png'
   }
 }, { versionKey: false })
 
