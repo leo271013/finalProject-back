@@ -7,7 +7,8 @@ import {
   login,
   logout,
   extend,
-  updateInfo
+  updateInfo,
+  getUserInfo
 } from '../controllers/users.js'
 
 const router = express.Router()
@@ -17,5 +18,6 @@ router.post('/login', content('application/json'), login)
 router.post('/extend', auth, extend)
 router.delete('/logout', auth, logout)
 router.patch('/:id', updateInfo)
+router.get('/me', auth, getUserInfo)
 
 export default router
