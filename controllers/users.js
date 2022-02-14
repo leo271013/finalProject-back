@@ -104,3 +104,7 @@ export const getUserInfo = (req, res) => {
     res.status(500).send({ success: false, message: '伺服器錯誤' })
   }
 }
+
+export const uploadimg = async (req, res) => {
+  console.log(req)
+}
