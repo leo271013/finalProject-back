@@ -66,7 +66,7 @@ const userSchema = new mongoose.Schema({
     maxlength: [50, '介紹必須 50 個字以下'],
     default: ''
   },
-  userImg: {
+  image: {
     type: String,
     default: 'https://res.cloudinary.com/duastxica/image/upload/v1644384306/pngegg_vy0np4.png'
   }

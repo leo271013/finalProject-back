@@ -1,6 +1,7 @@
 import express from 'express'
 import content from '../middleware/content.js'
 import auth from '../middleware/auth.js'
+import upload from '../middleware/upload.js'
 
 import {
   register,
@@ -17,7 +18,7 @@ router.post('/', content('application/json'), register)
 router.post('/login', content('application/json'), login)
 router.post('/extend', auth, extend)
 router.delete('/logout', auth, logout)
-router.patch('/:id', updateInfo)
+router.patch('/:id', upload, updateInfo)
 router.get('/me', auth, getUserInfo)
 
 export default router
