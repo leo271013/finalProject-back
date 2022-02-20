@@ -18,7 +18,6 @@ export default async (req, res, next) => {
       throw new Error()
     }
   } catch (error) {
-    console.log(error)
     if (error.name === 'TokenExpiredError' && req.baseUrl === '/users' && req.path === '/extend') {
       next()
     } else {
