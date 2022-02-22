@@ -23,37 +23,6 @@ const userSchema = new mongoose.Schema({
   tokens: {
     type: [String]
   },
-  product: {
-    type: [
-      {
-        productName: {
-          type: mongoose.ObjectId,
-          ref: 'productsName',
-          required: [true, '缺少商品 ID']
-        },
-        quantity: {
-          type: Number,
-          required: [true, '缺少商品數量']
-        },
-        imageURL: {
-          type: String,
-          required: [true, '缺少商品圖片']
-        },
-        productType: {
-          type: String,
-          required: [true, '缺少商品種類']
-        },
-        give: {
-          type: Boolean,
-          required: [true, '請選擇是否以物易物']
-        },
-        target: {
-          type: String,
-          required: [true, '請選擇交換對象']
-        }
-      }
-    ]
-  },
   userName: {
     type: String,
     minlength: [1, '名稱必須 1 個字以上'],

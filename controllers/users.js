@@ -67,8 +67,7 @@ export const extend = async (req, res) => {
 export const updateInfo = async (req, res) => {
   const data = {
     userName: req.body.userName,
-    aboutMe: req.body.aboutMe,
-    image: req.body.image
+    aboutMe: req.body.aboutMe
   }
 
   if (req.file) {
