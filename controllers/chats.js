@@ -1,6 +1,6 @@
 // {$or:[{members:ObjectId('61ee3d419518739e2b8f937f')},{members:ObjectId('61ee2113e385af2d16efa02a')}]}
 import chats from '../models/chats.js'
-import mongoose from 'mongoose'
+// import mongoose from 'mongoose'
 
 export const newMessage = async (req, res) => {
   try {
@@ -50,7 +50,7 @@ export const getChat = async (req, res) => {
         {
           $match: {
             members: {
-              $all: [req.user._id, mongoose.Types.ObjectId(req.body.product.userId)]
+              $all: [req.user._id.toString()]
             }
           }
         }, {
@@ -78,7 +78,7 @@ export const getChat = async (req, res) => {
         {
           $match: {
             members: {
-              $all: [req.user._id, mongoose.Types.ObjectId(req.body.product.userId)]
+              $all: [req.user._id.toString()]
             }
           }
         }, {
@@ -108,7 +108,7 @@ export const getChat = async (req, res) => {
       ])
       res.status(200).send({ success: true, message: '', result: result[0]?.messages || [] })
     } else {
-      console.log(req.user._id.toString())
+      // console.log(req.user._id.toString())
       const result = await chats.findOne({
         members: {
           $all: [req.user._id.toString()]

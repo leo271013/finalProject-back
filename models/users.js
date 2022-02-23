@@ -37,7 +37,7 @@ const userSchema = new mongoose.Schema({
   },
   image: {
     type: String,
-    default: 'https://res.cloudinary.com/duastxica/image/upload/v1644384306/pngegg_vy0np4.png'
+    default: 'https://res.cloudinary.com/duastxica/image/upload/v1645620127/%E6%9C%AA%E5%91%BD%E5%90%8D-1_xcsfv0.png'
   }
 }, { versionKey: false })
 
