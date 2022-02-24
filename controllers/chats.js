@@ -7,7 +7,7 @@ export const newMessage = async (req, res) => {
     let result = await chats.findOneAndUpdate({
       members: req.user._id, _id: req.params.id
       // $and: [
-      //   { members: { $elemMatch: { $eq: req.user._id.toString() } } },
+      //   { members: { $elemMatch: { $eq: .toString() } } },
       //   { members: { $elemMatch: { $eq: req.params.id } }}
       // ]
     }, {
@@ -45,12 +45,16 @@ export const getList = async (req, res) => {
 
 export const getChat = async (req, res) => {
   try {
+    console.log(req.user._id.toString(), req.params.id)
     if (req.query.gt) {
       const result = await chats.aggregate([
         {
           $match: {
+            'product._id': req.params.id,
             members: {
-              $all: [req.user._id.toString()]
+              $all: [
+                req.user._id.toString()
+              ]
             }
           }
         }, {
@@ -72,13 +76,17 @@ export const getChat = async (req, res) => {
           }
         }
       ])
-      res.status(200).send({ success: true, message: '', result: result[0]?.messages || [] })
+      console.log('A' + result)
+      res.status(200).send({ success: true, message: '', result: result || [] })
     } else if (req.query.lt) {
       const result = await chats.aggregate([
         {
           $match: {
+            'product._id': req.params.id,
             members: {
-              $all: [req.user._id.toString()]
+              $all: [
+                req.user._id.toString()
+              ]
             }
           }
         }, {
@@ -106,15 +114,18 @@ export const getChat = async (req, res) => {
           }
         }
       ])
-      res.status(200).send({ success: true, message: '', result: result[0]?.messages || [] })
+      console.log('B' + result)
+      res.status(200).send({ success: true, message: '', result: result || [] })
     } else {
       // console.log(req.user._id.toString())
-      const result = await chats.findOne({
+      const result = await chats.find({
         members: {
           $all: [req.user._id.toString()]
-        }
+        },
+        'product[0]._id': req.params.id
       }, { messages: { $slice: -20 } })
-      res.status(200).send({ success: true, message: '', result: result?.messages || [] })
+      // console.log('C' + result[0].messages)
+      res.status(200).send({ success: true, message: '', result: result[0].messages || [] })
     }
   } catch (error) {
     console.log(error)
