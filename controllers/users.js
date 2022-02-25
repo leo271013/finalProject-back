@@ -97,3 +97,17 @@ export const getUserInfo = (req, res) => {
     res.status(500).send({ success: false, message: '伺服器錯誤' })
   }
 }
+
+export const getMesInfo = async (req, res) => {
+  try {
+    const result = await users.find({ _id: req.params.id })
+    const info = {
+      _id: result[0]._id,
+      userName: result[0].userName,
+      image: result[0].image
+    }
+    res.status(200).send({ success: true, message: '', info })
+  } catch (error) {
+    res.status(500).send({ success: false, message: '伺服器錯誤' })
+  }
+}

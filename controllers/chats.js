@@ -1,15 +1,13 @@
 // {$or:[{members:ObjectId('61ee3d419518739e2b8f937f')},{members:ObjectId('61ee2113e385af2d16efa02a')}]}
+// import { query } from 'express'
 import chats from '../models/chats.js'
 // import mongoose from 'mongoose'
 
 export const newMessage = async (req, res) => {
+  console.log(req.user._id.toString(), req.params.id)
   try {
     let result = await chats.findOneAndUpdate({
-      members: req.user._id, _id: req.params.id
-      // $and: [
-      //   { members: { $elemMatch: { $eq: .toString() } } },
-      //   { members: { $elemMatch: { $eq: req.params.id } }}
-      // ]
+      members: req.user._id.toString(), 'product._id': req.params.id
     }, {
       $push: {
         messages: {
@@ -45,7 +43,6 @@ export const getList = async (req, res) => {
 
 export const getChat = async (req, res) => {
   try {
-    console.log(req.user._id.toString(), req.params.id)
     if (req.query.gt) {
       const result = await chats.aggregate([
         {
@@ -76,7 +73,6 @@ export const getChat = async (req, res) => {
           }
         }
       ])
-      console.log('A' + result)
       res.status(200).send({ success: true, message: '', result: result || [] })
     } else if (req.query.lt) {
       const result = await chats.aggregate([
@@ -114,17 +110,14 @@ export const getChat = async (req, res) => {
           }
         }
       ])
-      console.log('B' + result)
       res.status(200).send({ success: true, message: '', result: result || [] })
     } else {
-      // console.log(req.user._id.toString())
       const result = await chats.find({
         members: {
           $all: [req.user._id.toString()]
         },
-        'product[0]._id': req.params.id
+        'product._id': req.params.id
       }, { messages: { $slice: -20 } })
-      // console.log('C' + result[0].messages)
       res.status(200).send({ success: true, message: '', result: result[0].messages || [] })
     }
   } catch (error) {

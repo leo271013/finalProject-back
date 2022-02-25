@@ -9,7 +9,8 @@ import {
   logout,
   extend,
   updateInfo,
-  getUserInfo
+  getUserInfo,
+  getMesInfo
 } from '../controllers/users.js'
 
 const router = express.Router()
@@ -20,5 +21,6 @@ router.post('/extend', auth, extend)
 router.delete('/logout', auth, logout)
 router.patch('/:id', upload, updateInfo)
 router.get('/me', auth, getUserInfo)
+router.get('/:id', getMesInfo)
 
 export default router
