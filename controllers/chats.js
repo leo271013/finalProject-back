@@ -4,7 +4,6 @@ import chats from '../models/chats.js'
 // import mongoose from 'mongoose'
 
 export const newMessage = async (req, res) => {
-  console.log(req.user._id.toString(), req.params.id)
   try {
     let result = await chats.findOneAndUpdate({
       members: req.user._id.toString(), 'product._id': req.params.id
